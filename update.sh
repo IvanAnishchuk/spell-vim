@@ -1,5 +1,9 @@
+#!/bin/bash
 BASE="http://ftp.vim.org/pub/vim/runtime/spell/"
-cat | wget -x -nH --cut-dirs=3 -i - -B $BASE << EOF
+cat | wget -r \
+  -I /pub/vim/runtime/spell/ru/,/pub/vim/runtime/spell/en/ \
+  -A txt,spl,sug,aap,diff \
+  -x -nH --cut-dirs=3 -i - -B $BASE << EOF
 README_ru.txt
 README_en.txt
 en.ascii.spl
@@ -14,4 +18,7 @@ ru.koi8-r.spl
 ru.koi8-r.sug
 ru.utf-8.spl
 ru.utf-8.sug
+ru/
+en/
 EOF
+rm robots.txt
